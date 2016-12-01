@@ -10,15 +10,17 @@ $(document).ready(function() {
   	// Characters
       // array of objects
       // each has different properties of health, attack power, counter attack power
-  var characters = [];
+  var characters = [ ];
     
   	// Active Stats Variables
   var playerHealth;
   var playerAttack;
   var playerCounter;
+  var enemies;
   var enemyHealth;
   var enemyAttack;
   var enemyCounter;
+  var i = 0;
 
   // Active Characters
   var playerActive;
@@ -33,12 +35,21 @@ $(document).ready(function() {
     characters[1] = {name: 'Lando Calrissian', health: 220, attack: 10, counter: 18, };
     characters[2] = {name: 'IG-88', health: 150, attack: 20, counter: 10, };
     characters[3] = {name: 'Boba Fett', health: 200, attack: 18, counter: 5,};
-
-    var i = 0;
-    $('.character').each(function() {
-      $('.name').html(characters[i].name);
+    
+    $('.name').each(function() {
+      $(this).text(characters[i].name);
       i++;
     });
+
+    i = 0
+    $('.stats').each(function() {
+      $(this).text('Health: ' + characters[i].health + ' Attack: ' + characters[i].attack + ' Counter: ' + characters[i].counter);
+      i++;
+    });
+
+    console.log(characters);
+
+    
   }
 
   newGame();
@@ -46,6 +57,12 @@ $(document).ready(function() {
   // If there are enemies
     // Player picks Enemy
       // Enemies stats load
+
+
+  $('.character').on('click', function() {
+
+
+  });
 
     // Player attacks enemy
      // Enemy loses health (health - attack)
