@@ -100,9 +100,10 @@ $(document).ready(function() {
       // Enemies stats load
 
 
-  $('.character').on('click', function() {
+  $('.characterList').on('click','.character', function() {
     
     var p;
+    console.log('click');
 
     if ((playerPicked === false) && (enemyPicked)) {
       var playerInfo = $(this).html();
