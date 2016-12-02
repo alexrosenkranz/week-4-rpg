@@ -36,6 +36,13 @@ $(document).ready(function() {
     characters[2] = {name: 'IG-88', health: 150, attack: 20, counter: 10, };
     characters[3] = {name: 'Boba Fett', health: 200, attack: 18, counter: 5,};
     
+    $('.character').each(function() {
+      $(this).attr('data-value',characters[i]);
+      i++;
+    });
+
+
+    i = 0;
     $('.name').each(function() {
       $(this).text(characters[i].name);
       i++;
@@ -60,7 +67,8 @@ $(document).ready(function() {
 
 
   $('.character').on('click', function() {
-
+    playerActive = characters[$(this).attr('data-value')];
+    console.log(playerActive);
 
   });
 
