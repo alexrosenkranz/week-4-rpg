@@ -53,14 +53,14 @@ $(document).ready(function() {
       name: 'Boba Fett', 
       health: 200, 
       attack: 18, 
-      counter: 5, 
+      counter: 8, 
       pic: 'assets/images/bobafett.jpg'
     };
     playerPicked = false;
     enemyPicked = true;
     
     $(characters).each(function(){
-      $('.characterList').append('<div class="character col-xs-12 col-sm-12 col-md-6"><div class="name"></div><img class="pic"/><div class="stats"></div></div>')
+      $('.characterList').append('<div class="character col-xs-3 col-sm-3 col-md-2"><div class="name"></div><img class="pic"/><div class="stats"></div></div>')
 
     });
 
@@ -86,6 +86,8 @@ $(document).ready(function() {
       i++;
     });
     i = 0;
+
+    $('.pickCharacter').html('<h3>Pick A Player!</h3>');
     console.log(characters);
     playerPicked = false;
     enemyPicked = true;
@@ -106,6 +108,8 @@ $(document).ready(function() {
     console.log('click');
 
     if ((playerPicked === false) && (enemyPicked)) {
+
+      $('.pickCharacter').html('<h3>Pick An Enemy!</h3>');
       var playerInfo = $(this).html();
       p = $(this).attr('data-value');
       playerActive = characters[p];
@@ -127,6 +131,8 @@ $(document).ready(function() {
     }
 
     else if ((enemyPicked === false) && (playerPicked === true)) {
+
+      
       var enemyInfo = $(this).html();
       p = $(this).attr('data-value');
       enemyActive = characters[p];

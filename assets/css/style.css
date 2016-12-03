@@ -9,3 +9,7 @@
 .pic {
   width: 100%;
 }
+
+h1.title {
+	margin: 0;
+}
