@@ -82,7 +82,7 @@ $(document).ready(function() {
     });
     i = 0;
     $('.stats').each(function() {
-      $(this).html('Health: ' + characters[i].health + ' Attack: ' + characters[i].attack + ' Counter: ' + characters[i].counter);
+      $(this).html('Health: ' + characters[i].health + '<br/>Attack: ' + characters[i].attack + '<br/>Counter: ' + characters[i].counter);
       i++;
     });
     i = 0;
@@ -114,9 +114,8 @@ $(document).ready(function() {
       p = $(this).attr('data-value');
       playerActive = characters[p];
       playerBaseAttack = playerActive.attack;
-      characters.splice(p, 1);      
-      console.log(playerActive);
-      console.log(characters);
+      characters.splice(p, 1);     
+
       $(this).remove();
       $('.player').html(playerInfo);
       $('.character').each(function() {
@@ -124,7 +123,7 @@ $(document).ready(function() {
         i++;
       });
 
-      $('.player .stats').html('Health: ' + playerActive.health + ' Attack: ' + playerActive.attack + ' Counter: ' + playerActive.counter);
+      $('.player .stats').html('Health: ' + playerActive.health + '<br/>Attack: ' + playerActive.attack + '<br/>Counter: ' + playerActive.counter);
       i = 0;
       playerPicked = true;
       enemyPicked = false;
@@ -137,15 +136,14 @@ $(document).ready(function() {
       p = $(this).attr('data-value');
       enemyActive = characters[p];
       characters.splice(p,1);
-      console.log(enemyActive);
-      console.log(characters);
+
       $(this).remove();
       $('.enemy').html(enemyInfo);
       $('.character').each(function() {
         $(this).attr('data-value',i);
         i++;
       });
-      $('.enemy .stats').html('Health: ' + enemyActive.health + ' Attack: ' + enemyActive.attack + ' Counter: ' + enemyActive.counter);
+      $('.enemy .stats').html('Health: ' + enemyActive.health + '<br/>Attack: ' + enemyActive.attack + '<br/>Counter: ' + enemyActive.counter);
 
       i = 0;
       enemyPicked = true;
@@ -159,35 +157,7 @@ $(document).ready(function() {
   // playerActive & enemyActive
 
     // Player attacks enemy
-
-  $('.attack').on('click', function() {
-    if (enemyActive.health <= 0) {
-      $('.enemy').html('<h2>Enemy vanquished, pick a new battle</h2>');
-      playerActive.attack = playerBaseAttack;
-      enemyPicked = false;
-    }
-
-    else if (enemyActive.health > 0 && playerActive.health > 0){
-      enemyActive.health = enemyActive.health - playerActive.attack;
-      $('.enemy .stats').html('Health: ' + enemyActive.health + ' Attack: ' + enemyActive.attack + ' Counter: ' + enemyActive.counter);
-      playerActive.attack = playerActive.attack + playerBaseAttack;
-
-      playerActive.health = playerActive.health - enemyActive.counter;
-      $('.player .stats').html('Health: ' + playerActive.health + ' Attack: ' + playerActive.attack + ' Counter: ' + playerActive.counter);
-
-    }
-
-    else if (playerActive.health <= 0) {
-      $('.player').html('<h2>You lose! Start a new game. </h2>');
-    }
-
-  });
-
-
-  $('.newGame').on('click', function() {
-    newGame();
-  });
-     // Enemy loses health (health - attack)
+    // Enemy loses health (health - attack)
       // Enemy counterattacks
       //  Increase player attack stat by base attack power
 
@@ -199,6 +169,38 @@ $(document).ready(function() {
       // If there are more enemies, repeat pick
 
     // If no enemies left, player wins and restart game
+
+  $('.attack').on('click', function() {
+    if (enemyActive.health <= 0) {
+      $('.enemy').html('<h2>Enemy vanquished, pick a new battle</h2>');
+      playerActive.attack = playerBaseAttack;
+      enemyPicked = false;
+    }
+
+    else if (enemyActive.health > 0 && playerActive.health > 0){
+      enemyActive.health = enemyActive.health - playerActive.attack;
+      $('.enemy .stats').html('Health: ' + enemyActive.health + '<br/>Attack: ' + enemyActive.attack + '<br/>Counter: ' + enemyActive.counter);
+      playerActive.attack = playerActive.attack + playerBaseAttack;
+
+      playerActive.health = playerActive.health - enemyActive.counter;
+      $('.player .stats').html('Health: ' + playerActive.health + '<br/>Attack: ' + playerActive.attack + '<br/>Counter: ' + playerActive.counter);
+
+    }
+
+    else if (playerActive.health <= 0) {
+      $('.player').html('<h2>You lose! Start a new game. </h2>');
+    }
+
+    else if(enemyActive.health <= 0 && enemyPicked === false) {
+      $('.characterList').html('<h2>You win!</h2>');
+    }
+  });
+
+
+  $('.newGame').on('click', function() {
+    newGame();
+  });
+     
 
 
 });
